@@ -23,7 +23,8 @@ npm install terraform-cloud # With NPM
 import { TerraformCloud } from 'terraform-cloud'
 
 // Set a your terraform cloud API token
-const { Account, Plans, Runs } = new TerraformCloud('terraform-api-token')
+const abortController = new AbortController() // Abort controller for all requests
+const { Account, Plans, Runs } = new TerraformCloud(abortController.signal, 'terraform-api-token')
 
 // Make an API call
 

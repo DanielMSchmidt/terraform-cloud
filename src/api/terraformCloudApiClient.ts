@@ -2,9 +2,11 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import { VERSION } from '../version'
 
+const GB = 1024 * 1024
+
 const terraformCloudApiClient = (apiKey: string): AxiosInstance => {
   const apiUrl = 'https://app.terraform.io/api/v2'
-  const client: AxiosInstance = axios.create({ baseURL: apiUrl })
+  const client: AxiosInstance = axios.create({ baseURL: apiUrl, maxBodyLength: 1 * GB })
   client.interceptors.request.use((req: AxiosRequestConfig) => {
     req.headers = {
       Authorization: `Bearer ${apiKey}`,
